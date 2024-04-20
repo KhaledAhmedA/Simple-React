@@ -1,0 +1,301 @@
+vagrant / vmware / virtual machines / virtualBox / SandBox workspace
+low level programming and C languaghes topics [data strucure - basic algorithms]
+web development with javascript [reactjs, nodejs, nextjs]
+embedded systems familiar
+databases managament systems SQL / NoSQL
+operating system [windows - linux]
+electrical and electronics
+networking basics and VOIP
+Cloud and DevOps
+
+
+
+
+
+
+Machine learning
+supervised learn (labeled - classefication)
+npn-supervised learn (unlabeled - clustering)
+
+---------------------------------
+**** Network Notes - Topics - keywords - commands ****
+
+ping (round trip time) - ping /? - ping -n num
+tracert -d
+
+internet protocol stack (
+physical / bits on the wire -
+link / ethernet 802.111wifi PPP -
+network / ip routing protocol -
+transport / TCP UDP -
+application / FTP HTTP SMTP)
+
+hosts = end system and computing devices running network apps
+
+encoding like ascii or unicode
+RFC then protocol name to get standard decomentation
+
+TCP initial connect between devices connection via internet
+
+invent network (queue theory) packet switching
+
+modelation and demodelation (modem) electrical signal and digital signal conversion
+on the same transmitting media link (multi channel)
+
+DSLAM digital subscriper line access multiplexer (reverse function of splitter) (merging signals)
+
+digital signal has fidilty (can remove noise) but analog not
+
+size / size of packet = transmitting time
+
+router buffer - storing forward
+
+telephone - circuit switching - one connection - no sharing connection
+packet switching - multi connection same time - shared connection
+
+processing delay - queuing delay - propagation delay (length of physical link)
+
+routing algorithms
+
+packet drops when memory(router buffer) fills up
+
+queuing delay
+
+bandwidth (physical proprty for lines measured by hertz) =
+transimission rate = bit per second (bit/sec)
+this is a related with encoding scheme
+
+packet switches (routers - switches) internet edges
+
+
+
+
+
+---------------------------------
+***** Apache web server *****
+
+get request data sends within request line
+post request data sends within request body (payload)
+
+status codes:
+- 1xx informational
+- 2xx success
+- 3xx redirection
+- 4xx client error
+- 5xx server error
+200 OK - 401 unauthorized - 403 forbidden - 404 not found - 500 internal server error
+
+Apache and web servers cosists of 3 types of files:
+1- log files record events and actions on the site (access logs / error logs / custom logs)
+2- web files like html css js and any browse files (path: /var/www/html)
+3- configuration files consists of two main types:
+- global / main / default configuration files (apply on all system)
+- directory level to specefic directory
+
+public web files / log files path:
+(Ubuntu)
+/var/www/html
+/var/log/apache2
+(CentOS)
+/var/www/html
+/var/log/httpq
+
+main configuration file
+(Ubuntu)
+/etc/apache2/apache2.conf
+(CentOS)
+/etc/httpq/conf/httpq.conf
+
+command apache2 server (sudo service apache2 start/stop/restart)
+after any configuration change must restart (sudo service apache2 restart)
+
+directive is a keyword followed by one or more arguments
+
+apache2.conf (<Directory dirpath>
+    #configuration directives - write global config directly or
+    AllowOverRide all
+    #then create .htaccess in project dir and write configurations
+
+    #indicate visitors depends on ip ads
+    Allow from IP address
+    deny from all
+    order deny,allow
+</Directory>)
+
+static medule (compiled module) and shared module (run time module)
+display cpmpiled modules:
+apache2ctl -l (Ubuntu) / httpq -l (CentOS)
+list all modules compiled and shared:
+apache2ctl -M (Ubuntu) / httpq -m (CentOS)
+to enable or deisable module:
+sudo a2enmod modulename / sudo a2dismod modulename
+
+apache2.x supports pluggable concurrency models called MPM
+
+MPMs multi-processing modules:
+
+- the worker module:
+hypered between multi-process and multi-thread
+server larger requests with less resources than process-based server
+many threads inside process
+disadvantage effect other threads - less stability not accurated - not isolated
+
+- the event module:
+as well as worker module but handle larger amount of requests
+AsyncRequestWorkerFactor
+if all worker are busy will close keep alive state connection
+
+- the prefork module:
+non-threaded - not proper to handle too many requests (start/minspare/maxspareservers/maxclients)
+advantage - process serve request (isolate each request dosnt effect each other)
+disadvantage - processing time will waste on the process switching for requests and processor stress
+
+Rewrite Module:
+URL manipulations - one used to migrate apps or systems - redirection
+RewriteRule - RewriteCond
+
+
+
+
+
+
+
+thread is a lightweight process (stack - registers - pc)
+thread seperated process in the parent process sharing same memory space (isolation)
+modules devided server into processes or process into threads
+many process effects performance makes it low
+
+
+
+
+
+
+
+
+---------------------------------
+**** DevOps Main Pillars - Main Skills ****
+Dev (build) / Ops (start stop run ...)
+physical server - virtual machine - templates - docker (containers - kernel terminal)
+base disk - base image (.vhd/
+.avhd-deferancing vhd - has only defferances of vhd and being the parent of vhd)
+
+OS specefications (terminal mode and user mode)
+container consists of layers above kernel
+
+cloud infrastructure /
+orchastration - kubernates - dockercharm /
+containrisation - docker /
+integration - jenkis - github /
+infrastructure automation - infrastructure as a code - terraform /
+configuration managament - ansibl /
+monitoring solutions - promissus /
+kubernates native - piplines - kubernates AWS /
+dasa organization - devops agile associated - dasa princible /
+ckad - cert kubernates application development /
+SRE - site raibly engineer - google career /
+capx - opex /
+cloud == infrastructure + orchastration [add and remove services] and automation /
+cloud [public - private - hyprid] /
+accountability and logs [root - IAM] /
+identify federation - auth by trusted account like google acc /
+PCI Compliance - credit card information security standard /
+IAM long term credintial - STS secure token service (temp session) /
+4 methods for AWS [
+- username and password (console)
+- parogramatic access key
+- SD keys (python - nodejs ...) acess key and secrect access key or IAM Rules Temp session
+- API's
+]
+
+root and important users uses multi factor authantication MFA
+virtual private cloud VPC
+
+when create account AWS make default VPC on all of its regions
+with basic security and services and DNS and can make own VPC with IP adrs
+
+VPC Components [ CIDR class list interdomain routing block and subnets (ip range in VPC)]
+
+no subnets overlapping at VPC (TCP/IP restrection)
+
+implied router to connect and sync between subnets at deferent VPC
+[cant control router its by default but route table]
+
+advanced - before the traffic comes for VPC
+(edge associations)[redirect for another security VPC and return]
+
+VGW virtual gateway - VPN in hypred with on-premsis
+IGW (internet gateway) and public submit vs private submit
+0.0.0.0/0 public entry
+
+routing coponents of vpc
+direct connect (high performance) vs vpn and vpn as backup connection
+deattach then remove for VGW and IGW
+
+region is physical or geographic area for AWS infrastructure
+
+EC2 vs instance store
+
+elastic compute cloud EC2 (ECC) soft limit = virtual server
+hypervisor to emulate many virtual server from one server device
+hypervisor (hardware virtualization)
+dedicated host and shared host
+
+ENI elastic network interface eth0
+EBS elastic block store (volume service) - through network - must same availability zone
+to make root volume - boot volume (OS of EC2 instance)
+EBS volume is presestance (EBS backed EC2 instance)(EC2 instance depends on EBS volume)
+
+instance store being at the same physical server faster and proformed than EBS
+instance store not presestance (IOPS) input output operation per second being very high
+
+using SSH to connect to linux EC2 instance
+
+public key for ssh client and private key for server but at VPC the opposite
+must download the key while creating instance
+
+AMI amazon machine image (select OS for EC2)
+
+source (user IP) - distnation (VPC public IP - NAT - private IP)
+NAT convert public IP into private IP
+PAT port address translation
+
+NACLs vs Security group
+
+security group (firewall on the instance inbound and outbound) stateful
+
+inbound traffic from another instance or from internet throug subnet to my enviroment
+
+NACLs - network access control lists / works at subnet level not instance level / stateless
+disadvantage of NCLs - permit for all subnets or deny for all subnets
+advantage is defender line for instance (first line of defence) then security group of instance
+has its own rule of inbound and outbound not stateful like security group rules
+
+implied router (routing core and brain) connect all subnets in VPC togther
+and routing IGW - VGW (internet)
+
+instance inside same subnet then security group rule takes control
+outside instance or from internet through implied router then NACLs will control
+
+security group deal with inbound and outbound with same rules and empacts only instances in EC2
+NACLs deals with inbound and outbound as different rules for each one and empacts all instances
+
+NACLs confined to VPC
+security group checks all rules
+but NACLs check from lowest to first rule
+
+instance may has many security group at a time
+subnet has only one NACLs at a time
+NACLs can associate for many subnets
+
+
+
+
+
+
+
+
+---------------------------------
+******* Docker *******
+is an open source standalone appliction
+which works as an engine used to run containerized applications
+run multiple applications isolated
